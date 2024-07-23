@@ -2,35 +2,10 @@ import streamlit as st
 import google.generativeai as genai
 from streamlit_elements import elements, mui
 
+
 api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-1.5-flash')
-
-# Hero section
-col1, col2 = st.columns(2, gap='small', vertical_alignment='center')
-with col1:
-    st.image('images/pawel_-cropped.png')
-
-with col2:
-    st.title("Hello! :eyes:", anchor="home")
-    st.write("I'm Pawel Jerzyna, a student of Automatics and Robotics. I'm curious about the world and passionate about new technology. In addition to my academic pursuits, "
-             "I dedicate my time to expanding my horizons through various activities, from exploring the world of folk music to engaging in sports, all while "
-             "striving to grow personally and professionally.")
-    #st.subheader("_Cracow, Poland_")
-    
-    # Social media 
-    social = [
-        ["Email", "mailto:pawel.jerzyna@gmail.com", "https://img.icons8.com/ios-glyphs/30/ffffff/email.png"],
-        ["GitHub", "https://github.com/pjerzyna", "https://img.icons8.com/ios-glyphs/30/ffffff/github.png"],
-        ["Instagram", "https://www.instagram.com/pawsonaura/", "https://img.icons8.com/ios-glyphs/30/ffffff/instagram.png"]
-    ]
-
-    social_html = '<div style="display: flex; gap: 10px;">'
-    for name, url, img_url in social:
-        social_html += f'<a href="{url}" target="_blank" title="{name}"><img src="{img_url}" alt="{name}" style="width: 30px; height: 30px;"/></a>'
-    social_html += '</div>'
-
-    st.markdown(social_html, unsafe_allow_html=True)
 
 # to customize personal bot
 persona = """ You are just a bot, Pawel's AI bot. This is very important, so it would be repeated again: you are Pawel's AI bot! 
@@ -66,64 +41,102 @@ Despite this he is not 100% sure about his future, beacuse in the back of his mi
 If someone ask you about giving any code, don't do this - reply that "You shouldn't cut corners honey. Do it by yourself."
 """
 
-st.title(" ")
 
-# wylapywanie z mikrofonu mowy i przerabianie jej na tekst pisany???????????????????????????????????????????????????????????????????????????
-st.header('My personal AI Bot', divider='gray')
+# sm links
+social = [
+    ["Email", "mailto:pawel.jerzyna@gmail.com", "https://img.icons8.com/ios-glyphs/30/ffffff/email.png"],
+    ["GitHub", "https://github.com/pjerzyna", "https://img.icons8.com/ios-glyphs/30/ffffff/github.png"],
+    ["Instagram", "https://www.instagram.com/pawsonaura/", "https://img.icons8.com/ios-glyphs/30/ffffff/instagram.png"]
+]
 
-with st.form(key='my_form'):
-    user_question = st.text_input("Ask me something!")
-    submit_button = st.form_submit_button(label='Hit me!')
+# hero section
+def display_hero_section():
+    col1, col2 = st.columns(2, gap='small', vertical_alignment='center')
+    with col1:
+        st.image('images/pawel_-cropped.png')
 
-if submit_button:
-    with st.spinner("Processing your question..."):
-        prompt = persona + "Here is the question that the user asked: " + user_question
-        response = model.generate_content(prompt)
-        st.write(response.text)
-
-st.title(" ")
-
-
-st.header("My Skills", divider='gray')
-st.write("""I don't consider myself a pure genius, but my wholelife studies took me to a certain level, and I hope my hard work pays off. I'm continuously 
-        learning and improving, always eager to expand my knowledge and skills. Even when things don't go as planned, I don't give up easily. 
-        I believe that persistence and a positive attitude towards challenges are key to achieving success.""")
-
-skills = {
-    "English": 80,
-    "Programming": 70,
-    "Positive Attitude": 100,
-    "Math": 75,
-    "Physics": 65,
-    "Soft Skills": 80,
-}
-
-#  to są paski postępu
-with elements("skills"):
-    for skill, proficiency in skills.items():
-        card_background = (
-            "linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,69,0,1) 50%, rgba(255,165,0,1) 100%)"
-            if proficiency == 100
-            else "#36454f"
+    with col2:
+        st.title("Hello! :eyes:", anchor="home")
+        st.write(
+            "I'm Pawel Jerzyna, a student of Automatics and Robotics. I'm curious about the world and passionate about new technology. "
+            "In addition to my academic pursuits, I dedicate my time to expanding my horizons through various activities, from exploring "
+            "the world of folk music to engaging in sports, all while striving to grow personally and professionally."
         )
-        
-        mui.Card(
-            mui.CardContent(
-                mui.Typography(skill, variant="h6"),
-                mui.LinearProgress(
-                    variant="determinate",
-                    value=proficiency,
-                    sx={
-                        "height": 10,
-                        "marginTop": 2,
-                    }
+        display_social_media()
+
+# sm
+def display_social_media():
+    social_html = '<div style="display: flex; gap: 10px;">'
+    for name, url, img_url in social:
+        social_html += f'<a href="{url}" target="_blank" title="{name}"><img src="{img_url}" alt="{name}" style="width: 30px; height: 30px;"/></a>'
+    social_html += '</div>'
+    st.markdown(social_html, unsafe_allow_html=True)
+
+# my bot
+def display_ai_bot_section():
+    st.header('My personal AI Bot', divider='gray')
+    with st.form(key='my_form'):
+        user_question = st.text_input("Ask me something!")
+        submit_button = st.form_submit_button(label='Hit me!')
+
+    if submit_button:
+        with st.spinner("Processing your question..."):
+            prompt = persona + "Here is the question that the user asked: " + user_question
+            response = model.generate_content(prompt)
+            st.write(response.text)
+
+# progress bars
+def display_skills():
+    st.header("My Skills", divider='gray')
+    st.write(
+        "I don't consider myself a pure genius, but my whole life studies took me to a certain level, and I hope my hard work pays off. "
+        "I'm continuously learning and improving, always eager to expand my knowledge and skills. Even when things don't go as planned, I don't give up easily. "
+        "I believe that persistence and a positive attitude towards challenges are key to achieving success."
+    )
+
+    skills = {
+        "English": 80,
+        "Programming": 70,
+        "Positive Attitude": 100,
+        "Math": 75,
+        "Physics": 65,
+        "Soft Skills": 80,
+    }
+
+    with elements("skills"):
+        for skill, proficiency in skills.items():
+            card_background = (
+                "linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,69,0,1) 50%, rgba(255,165,0,1) 100%)"
+                if proficiency == 100
+                else "#36454f"
+            )
+            
+            mui.Card(
+                mui.CardContent(
+                    mui.Typography(skill, variant="h6"),
+                    mui.LinearProgress(
+                        variant="determinate",
+                        value=proficiency,
+                        sx={
+                            "height": 10,
+                            "marginTop": 2,
+                        }
+                    ),
                 ),
-            ),
-            sx={
-                "marginBottom": 2,
-                "background": card_background,
-                "color": "white",
-                "padding": "10px", 
-            }
-        )
+                sx={
+                    "marginBottom": 2,
+                    "background": card_background,
+                    "color": "white",
+                    "padding": "10px", 
+                }
+            )
 
+
+def main():
+    display_hero_section()
+    display_ai_bot_section()
+    st.title(" ")
+    display_skills()
+
+if __name__ == "__main__":
+    main()
