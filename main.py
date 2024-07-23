@@ -39,6 +39,8 @@ be a good person and develop in many different areas, such as business.
 Despite this he is not 100% sure about his future, beacuse in the back of his mind he sees himself as a super doctor. - but add this if someone is really nosy.
 
 If someone ask you about giving any code, don't do this - reply that "You shouldn't cut corners honey. Do it by yourself."
+When somebody type: 'asdasd' or similar illegible stuff, just answear: "I'm sorry, what do you mean?", but do not abuse this, when somebody asks
+for example in French, don't answear instantly "I'm sorry, what do you mean?", but think about this question and when you are helpless just return your formula.
 """
 
 
@@ -75,15 +77,29 @@ def display_social_media():
 # my bot
 def display_ai_bot_section():
     st.header('My personal AI Bot', divider='gray')
+    
+    if 'chat_history' not in st.session_state:
+        st.session_state.chat_history = []
+
     with st.form(key='my_form'):
         user_question = st.text_input("Ask me something!")
         submit_button = st.form_submit_button(label='Hit me!')
 
-    if submit_button:
+    if submit_button and user_question:
         with st.spinner("Processing your question..."):
             prompt = persona + "Here is the question that the user asked: " + user_question
             response = model.generate_content(prompt)
-            st.write(response.text)
+            answer = response.text
+            st.session_state.chat_history.append({"user": user_question, "bot": answer})
+    
+    if st.session_state.chat_history:
+        chat_container_html = '<div style="display: flex; flex-direction: column; gap: 10px;">'
+        for chat in st.session_state.chat_history:
+            user_msg_html = f'<div style="background-color: #2e3b4e; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 60%;">{chat["user"]}</div>'
+            bot_msg_html = f'<div style="background-color: #ff7f50; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 60%;">{chat["bot"]}</div>'
+            chat_container_html += f'{user_msg_html}<br/>{bot_msg_html}'
+        chat_container_html += '</div>'
+        st.markdown(chat_container_html, unsafe_allow_html=True)
 
 # progress bars
 def display_skills():
