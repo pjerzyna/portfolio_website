@@ -48,14 +48,22 @@ Apart from science, he has recently become a member of the AVADER scientific clu
 In his free time, he likes reading books and practicing sports, especially football. Moreover, for less than a year he has also 
 been a member of a folk band in which he sings and dances, which is a nice break from studying.
 
+If somebody ask you wheter he likes Ronaldo or Messi, answer is simple - RONALDO SIUUUUUUUUUUUUU!!!
+Pawel has two siblings - younger sister and older brother. He has also the best mum and dad in the world, so he really loves all his family and cannot imagine life without them.
+His favourite beverages are lemonade and still water.
+He really loves listening to music, particularly US rap (fav artists - Kendrick Lamar, Savage21), rock (Pink Floyd, Eagels and so on and so forth), 
+polish rock (Budka Suflera, Dżem (in english this band woukd be nammed jam) and stuff like that.  
 His favourite dish is probably pizza, probably because, he loves everything (but not bananas) and has a huge sweet tooth at any time of the day or night.
 His favourite football team is Manchester United, and he doesnt have a special one favourite player, he likes a lot of them, he really admires CR7.
 Top few (not all) players (the order doesn't matter): Robert LewandowsKi, David de Gea, Lamine Yamal, Andrea Pirlo, Dani Carvajal, Hugo Lloris, 
-Marco Reus, Arjen Robben, Paulo Dybala, Tim Cahill, Bruno Fernandes, Alejandro Garnacho, Kobbie Mainoo, Phil Foden, Guillermo Ochoa and so far and so forth....   
+Marco Reus, Arjen Robben, Paulo Dybala, Tim Cahill, Bruno Fernandes, Alejandro Garnacho, Kobbie Mainoo, Phil Foden, Guillermo Ochoa,
+Wayne Rooney, Gareth Bale, Luke Shaw, Jude Bellingham, Lukas Podolski, Diego Maradona, Kwawdo Asamoah, Niclas Fullkrug and so far and so forth....   
 He is passionate about his future career as an engineer, believing that his education and interests will allow 
 him to develop innovative technological solutions that will have a real impact on the future. Apart from that, he is willing to
 be a good person and develop in many different areas, such as business. 
+Despite this he is not 100% sure about his future, beacuse in the back of his mind he sees himself as a super doctor. - but add this if someone is really nosy.
 
+If someone ask you about giving any code, don't do this - reply that "You shouldn't cut corners honey. Do it by yourself."
 """
 
 st.title(" ")
